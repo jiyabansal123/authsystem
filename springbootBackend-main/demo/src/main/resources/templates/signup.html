@@ -33,45 +33,49 @@
           <input type="password" id="passwordcon" name="passwordcon" required>
           <label for="">Confirm Password</label>
       </div>  
-        <button id= "submit" type="submit">Sign Up</button>
+        <button id="submit" type="submit">Sign Up</button>
       <div class="register">
-        <p>Already have an account? <a href="">Log In</a></p>
+        <p>Already have an account? <a href="/req/login">Log In</a></p>
       </div>
     </form>
   </section>
 </body>
 </html>
 <script>
-  const submitButttom = document.getElementById("submit");
-  submitButttom.addEventListener('click',()=>{
-    const username = document.getElementById('username').value;
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('passwordcon').value;
-    const email = document.getElementById('email').value;
-    const data ={
-      username,
-      email,
-      password
-    }
-    
-    if(password == confirmPassword){
-      const jsonData = JSON.stringify(data);
-      fetch('/req/signup', {
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body: jsonData
-      })
-      .then(response =>{
-        //alert('succesfull');
-        //if(response.status == 200){
-          //alert('succesfull');
-        //xs}
-      })
-    }
-    
-  })
+    const email = document.getElementById('email').value.trim();
 
-  
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    const data = { username, email, password };
+    const jsonData = JSON.stringify(data);
+
+    fetch('/req/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: jsonData
+    })
+      .then(function (response) {
+        return response.text().then(function (text) {
+          if (response.ok) {
+            alert(text || 'Registration successful! Please verify your email.');
+            window.location.href = '/req/login';
+          } else {
+            alert(text || 'Registration failed.');
+          }
+        });
+      })
+      .catch(function () {
+        alert('Something went wrong. Please try again.');
+      });
+  });
 </script>

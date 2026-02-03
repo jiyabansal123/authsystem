@@ -24,10 +24,12 @@ public class MyAppUserService implements UserDetailsService{
         Optional<MyAppUser> user = repository.findByUsername(username);
         if (user.isPresent()) {
             var userObj = user.get();
+            String role = userObj.getRole() != null ? userObj.getRole() : MyAppUser.ROLE_USER;
             return User.builder()
                     .username(userObj.getUsername())
                     .password(userObj.getPassword())
-                    .build();    
+                    .roles(role)
+                    .build();
         }else{
             throw new UsernameNotFoundException(username);
         }

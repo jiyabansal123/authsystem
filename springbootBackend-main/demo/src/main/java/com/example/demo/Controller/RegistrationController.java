@@ -44,7 +44,8 @@ public class RegistrationController {
             }
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        String vericationToken =JwtTokenUtil.generateToken(user.getEmail());
+        user.setRole(com.example.demo.Model.MyAppUser.ROLE_USER);
+        String vericationToken = JwtTokenUtil.generateToken(user.getEmail());
         user.setVerficationToken(vericationToken);
         myAppUserRepository.save(user);
         //Send Email Code

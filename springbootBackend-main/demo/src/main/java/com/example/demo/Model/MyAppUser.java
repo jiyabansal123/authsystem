@@ -8,7 +8,10 @@ import jakarta.persistence.Id;
 
 @Entity
 public class MyAppUser {
-    
+
+    public static final String ROLE_USER = "USER";
+    public static final String ROLE_ADMIN = "ADMIN";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,7 +20,10 @@ public class MyAppUser {
     private String password;
     private String verficationToken;
     private boolean isVerified;
-    
+
+    @Column(name = "role")
+    private String role = ROLE_USER;
+
     @Column(name = "reset_token")
     private String resetToken;
     
@@ -63,7 +69,12 @@ public class MyAppUser {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

@@ -3,72 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Home Page</title>
+    <meta name="description" content="Welcome — sign in or create an account to access your dashboard and manage your profile securely.">
+    <title>Home — Welcome</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --surface: #f5f5f5;
+            --text: #212121;
+            --text-muted: #616161;
+            --nav-bg: #263238;
+            --white: #fff;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 2rem 1rem;
             text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            opacity: 0.95;
+            font-size: 1rem;
         }
 
         nav {
             display: flex;
             justify-content: center;
-            background-color: #333;
+            flex-wrap: wrap;
+            gap: 0;
+            background-color: var(--nav-bg);
+            padding: 0;
         }
 
         nav a {
-            color: white;
-            padding: 14px 20px;
+            color: var(--white);
+            padding: 1rem 1.25rem;
             text-decoration: none;
-            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
         }
 
         nav a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        nav a[href^="/req/login"],
+        nav a[href^="/req/signup"] {
+            font-weight: 600;
         }
 
         main {
-            padding: 20px;
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        section h2 {
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+
+        section p {
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-box {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-box p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .cta-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .cta-links a {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-links a.primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .cta-links a.primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-links a.secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-links a.secondary:hover {
+            background: var(--surface);
+            transform: translateY(-1px);
         }
 
         footer {
-            background-color: #333;
-            color: white;
+            background-color: var(--nav-bg);
+            color: var(--white);
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            padding: 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Home Page</h1>
+    <header role="banner">
+        <h1>Welcome</h1>
+        <p>Sign in or create an account to access your dashboard and manage your profile securely.</p>
     </header>
-    <nav>
+
+    <nav role="navigation" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#contact">Contact</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/req/login">Log in</a>
+        <a href="/req/signup">Sign up</a>
     </nav>
-    <main>
-        <h2>About Me</h2>
-        <p>This is a paragraph about me. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque nisl ut sapien interdum, nec ullamcorper velit dapibus. Sed ac vestibulum libero, nec tempor felis.</p>
-        <h2>Services</h2>
-        <p>These are the services I offer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque nisl ut sapien interdum, nec ullamcorper velit dapibus. Sed ac vestibulum libero, nec tempor felis.</p>
+
+    <main role="main">
+        <section id="home" aria-labelledby="heading-home">
+            <h2 id="heading-home">Home</h2>
+            <p>This is your landing page. Use the links above to log in with an existing account or register a new one. Once signed in, you can manage your profile and access member-only content.</p>
+        </section>
+
+        <section id="about" aria-labelledby="heading-about">
+            <h2 id="heading-about">About</h2>
+            <p>This application provides a secure way to register, verify your email, and sign in. Your data is protected and you can update your profile after verification.</p>
+        </section>
+
+        <section id="services" aria-labelledby="heading-services">
+            <h2 id="heading-services">Services</h2>
+            <p>We offer user registration with email verification, secure login, and a simple dashboard. Create an account to get started.</p>
+            <div class="cta-box">
+                <p><strong>Get started</strong> — Create an account or log in to continue.</p>
+                <div class="cta-links">
+                    <a href="/req/signup" class="primary">Sign up</a>
+                    <a href="/req/login" class="secondary">Log in</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" aria-labelledby="heading-contact">
+            <h2 id="heading-contact">Contact</h2>
+            <p>For support or questions about your account, use the contact details provided by your administrator or reach out through your organization’s usual channels.</p>
+        </section>
     </main>
-    <footer>
-        <p>Footer Content &copy; 2024</p>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024–2025. All rights reserved.</p>
     </footer>
 </body>
 </html>
