@@ -24,10 +24,13 @@ Provides endpoints for registration, login, and basic user operations.
 - **H2 Database** (or MySQL, if configured)  
 - **Maven** for dependency management  
 
+---
+
+## Getting Started
+
 ### Prerequisites
 
 - Java 17 installed  
 - Maven installed  
 - IntelliJ IDEA or any IDE of your choice  
-
 
